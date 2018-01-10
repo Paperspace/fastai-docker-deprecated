@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recomme
          libnccl-dev=2.0.5-3+cuda9.0 \
          python-qt4 \
          libjpeg-dev \
+	 zip \
+	 unzip \
          libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
 
@@ -40,10 +42,11 @@ CMD source activate fastai
 CMD source ~/.bashrc
 
 
-WORKDIR /data/dogscats
+WORKDIR /data
 
-CMD wget http://files.fast.ai/data/dogscats.zip
-CMD unzip dogscats.zip
+RUN curl http://files.fast.ai/data/dogscats.zip --output dogscats.zip
+RUN unzip -d . dogscats.zip 
+RUN rm dogscats.zip
 
 RUN ln -s /data/ /fastai/courses/dl1/
 RUN ls -la /fastai/courses/dl1/data/
