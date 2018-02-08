@@ -28,19 +28,20 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      rm ~/miniconda.sh && \
     /opt/conda/bin/conda install conda-build
 
-RUN git clone https://github.com/fastai/fastai.git
-RUN cd fastai/ && ls && /opt/conda/bin/conda env create
+
+WORKDIR /notebooks
+
+RUN git clone https://github.com/fastai/fastai.git .
+RUN ls && /opt/conda/bin/conda env create
 RUN /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 ENV USER fastai
 
-WORKDIR /fastai
 
 CMD source activate fastai
 CMD source ~/.bashrc
-
 
 WORKDIR /data
 
@@ -48,15 +49,9 @@ RUN curl http://files.fast.ai/data/dogscats.zip --output dogscats.zip
 RUN unzip -d . dogscats.zip 
 RUN rm dogscats.zip
 
-RUN ln -s /data/ /fastai/courses/dl1/
-RUN ls -la /fastai/courses/dl1/data/
+RUN ln -s /data/ /notebooks/courses/dl1/
+RUN ls -la /notebooks/courses/dl1/data/
 
-WORKDIR /notebooks
-
-RUN ln -s /fastai/ .
-RUN ls -la /notebooks/
-
-RUN chmod -R a+w /fastai
 RUN chmod -R a+w /notebooks
 
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
