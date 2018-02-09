@@ -54,4 +54,6 @@ RUN ls -la /notebooks/courses/dl1/data/
 
 RUN chmod -R a+w /notebooks
 
+WORKDIR /notebooks
+
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
