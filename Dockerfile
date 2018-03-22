@@ -2,6 +2,7 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
+ARG TINI_VERSION=v0.16.1
 RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 
 RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recommends \
@@ -10,6 +11,7 @@ RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recomme
          git \
          curl \
          vim \
+         net-tools \
          ca-certificates \
          libnccl2=2.0.5-3+cuda9.0 \
          libnccl-dev=2.0.5-3+cuda9.0 \
@@ -28,19 +30,22 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      rm ~/miniconda.sh && \
     /opt/conda/bin/conda install conda-build
 
+# install tini
+RUN curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-$(dpkg --print-architecture) -o /sbin/tini
+RUN chmod +x /sbin/tini
 
 WORKDIR /notebooks
 
 RUN git clone https://github.com/fastai/fastai.git .
-RUN ls && /opt/conda/bin/conda env create
+RUN ls && /opt/conda/bin/conda env create -f environment-cpu.yml
 RUN /opt/conda/bin/conda clean -ya
 
-ENV PATH /opt/conda/envs/fastai/bin:$PATH
+ENV PATH /opt/conda/bin:/opt/conda/envs/fastai/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 ENV USER fastai
 
 
-CMD source activate fastai
+CMD source activate fastai-cpu
 CMD source ~/.bashrc
 
 WORKDIR /data
@@ -54,4 +59,10 @@ RUN ls -la /notebooks/courses/dl1/data/
 
 RUN chmod -R a+w /notebooks
 
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+EXPOSE 8888
+
+ENTRYPOINT ["/sbin/tini", "--"]
+# CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+CMD source activate fastai-cpu
+CMD source ~/.bashrc
+CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
