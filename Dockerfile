@@ -61,4 +61,4 @@ WORKDIR /notebooks
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
 #CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
-CMD ["jupyter", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
