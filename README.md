@@ -18,7 +18,7 @@ Nvidia Drivers
 
 ## Build
 
-`sudo docker build paperspace/fastai .`
+`sudo docker build -t paperspace/fastai .`
 
 ## Pre-built runtimes
 
