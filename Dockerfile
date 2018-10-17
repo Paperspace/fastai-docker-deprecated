@@ -42,7 +42,7 @@ ENV USER fastai
 CMD source activate fastai
 CMD source ~/.bashrc
 
-#RUN /opt/conda/bin/conda install jupyterlab
+RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
 
 WORKDIR /data
 
@@ -51,7 +51,6 @@ RUN unzip -d . dogscats.zip
 RUN rm dogscats.zip
 
 RUN ln -s /data/ /notebooks/courses/dl1/
-RUN ls -la /notebooks/courses/dl1/data/
 
 RUN chmod -R a+w /notebooks
 
@@ -60,5 +59,5 @@ WORKDIR /notebooks
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
-#CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+#CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
