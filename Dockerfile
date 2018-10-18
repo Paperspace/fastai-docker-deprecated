@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          curl \
          vim \
          ca-certificates \
-         libnccl2=2.2.13-1+cuda9.0 \
-         libnccl-dev=2.2.13-1+cuda9.0 \
          python-qt4 \
          libjpeg-dev \
 	 zip \
@@ -33,6 +31,7 @@ WORKDIR /notebooks
 
 RUN git clone https://github.com/fastai/fastai.git .
 RUN ls && /opt/conda/bin/conda env create
+# RUN /opt/conda/bin/conda create -n fastai -python=3.6
 RUN /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
@@ -43,14 +42,17 @@ CMD source activate fastai
 CMD source ~/.bashrc
 
 RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
+RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
+RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision-nightly
+RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
 
-WORKDIR /data
+# WORKDIR /data
 
-RUN curl http://files.fast.ai/data/dogscats.zip --output dogscats.zip
-RUN unzip -d . dogscats.zip
-RUN rm dogscats.zip
+# RUN curl http://files.fast.ai/data/dogscats.zip --output dogscats.zip
+# RUN unzip -d . dogscats.zip
+# RUN rm dogscats.zip
 
-RUN ln -s /data/ /notebooks/courses/dl1/
+# RUN ln -s /data/ /notebooks/courses/dl1/
 
 RUN chmod -R a+w /notebooks
 
@@ -60,4 +62,3 @@ WORKDIR /notebooks
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
-#CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
