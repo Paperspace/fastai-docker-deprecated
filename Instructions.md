@@ -7,7 +7,7 @@ There are no storage fees associated with using Gradient Notebooks. Users pay ho
 
 ## Getting Set Up
 ### Step 1: Create a Paperspace Account
-If you haven't already, you'll need to sign up for Paperspace [here](https://www.paperspace.com/account/signup). Confirm your account using the link in the email you receive from Paperspace. [ign in to Paperspace](https://www.paperspace.com/account/login). 
+If you haven't already, you'll need to sign up for Paperspace [here](https://www.paperspace.com/account/signup). Confirm your account using the link in the email you receive from Paperspace. [Sign in to Paperspace](https://www.paperspace.com/account/login). 
 
 ![image](https://user-images.githubusercontent.com/585865/47126635-76af7c80-d257-11e8-8f33-b34be1ae8ef3.png)
 
@@ -16,7 +16,8 @@ If you haven't already, you'll need to sign up for Paperspace [here](https://www
 I. On the left-hand side of your Console under Gradient, select Notebooks.
 
 II. Select the *Fast.ai 1.0 / PyTorch 1.0 BETA* base container. 
-** Note: for Pro users, learn more about this docker container at the [paperspace/fastai-docker repo](https://github.com/Paperspace/fastai-docker/tree/fastai/pytorch1.0)
+
+**Note: for Pro users, learn more about this docker container at the [paperspace/fastai-docker repo](https://github.com/Paperspace/fastai-docker/tree/fastai/pytorch1.0)**
 
 ![image](https://user-images.githubusercontent.com/585865/47126835-719efd00-d258-11e8-8d8d-b402ef8baecc.png)
 
@@ -38,6 +39,8 @@ You'll be taken to your Notebook details page in your Console, where your Notebo
 ### Step 3: Stopping your Notebook
 Under Action, just click stop.  This will end the billing session.
 
+![image](https://user-images.githubusercontent.com/585865/47126987-29340f00-d259-11e8-8432-10e47d3edbe0.png)
+
 ### Step 4: Restart your Notebook
 Click Start to pick up where you left off, and/or choose a different VM type on which you'd like to run your Notebook.
  
@@ -50,7 +53,7 @@ The Compute Type of your Notebook can be changed when you start it. What this me
 ## Managing Data
 Fast.ai data files (dogscats) can be found in the 'datasets' folder. Files in this directory are hosted by Paperspace and are read-only. See [Public Datasets](https://support.paperspace.com/hc/en-us/articles/360003092514-Public-Datasets) for more info.
 
-The 'storage' folder is your [Persistent Storage](https://support.paperspace.com/hc/en-us/articles/360001468133-Persistent-Storage). Files placed here are available across runs of Paperspace Jobs, Notebooks, and Linux machines. Empty by default, this repository is meant to store training datasets. 
+The `storage` folder is your [Persistent Storage](https://support.paperspace.com/hc/en-us/articles/360001468133-Persistent-Storage). Files placed here are available across runs of Paperspace Jobs, Notebooks, and Linux machines. Empty by default, this repository is meant to store training datasets. 
 
 The rest of the files in the notebooks directories will be available as Artifacts when your notebook is stopped. 
 
