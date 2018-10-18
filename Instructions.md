@@ -15,9 +15,11 @@ If you haven't already, you'll need to sign up for Paperspace [here](https://www
 ### Step 2: Access Gradient & Create Notebook
 I. On the left-hand side of your Console under Gradient, select Notebooks.
 
-II. Select the *Fast.ai 1.0 / PyTorch 1.0 BETA* base container.
+II. Select the *Fast.ai 1.0 / PyTorch 1.0 BETA* base container. 
+** Note: for Pro users, learn more about this docker container at the [paperspace/fastai-docker repo](https://github.com/Paperspace/fastai-docker/tree/fastai/pytorch1.0)
 
-![image](https://support.paperspace.com/hc/article_attachments/360007790614/Screen_Shot_2018-06-21_at_2.45.28_PM.png)
+![image](https://user-images.githubusercontent.com/585865/47126835-719efd00-d258-11e8-8d8d-b402ef8baecc.png)
+
 
 III. Select your Compute Type.
 
