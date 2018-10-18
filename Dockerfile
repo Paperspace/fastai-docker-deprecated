@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.0-base-ubuntu18.04
 
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
@@ -31,8 +31,6 @@ WORKDIR /notebooks
 
 RUN git clone https://github.com/fastai/fastai.git .
 RUN ls && /opt/conda/bin/conda env create
-# RUN /opt/conda/bin/conda create -n fastai -python=3.6
-RUN /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
@@ -41,18 +39,13 @@ ENV USER fastai
 CMD source activate fastai
 CMD source ~/.bashrc
 
+# PyTorch 1.0 and FastAI 1.0
 RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
 RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
 RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision-nightly
 RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
 
-# WORKDIR /data
-
-# RUN curl http://files.fast.ai/data/dogscats.zip --output dogscats.zip
-# RUN unzip -d . dogscats.zip
-# RUN rm dogscats.zip
-
-# RUN ln -s /data/ /notebooks/courses/dl1/
+RUN /opt/conda/bin/conda clean -ya
 
 RUN chmod -R a+w /notebooks
 
