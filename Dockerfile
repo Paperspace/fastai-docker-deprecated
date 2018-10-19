@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-base-ubuntu18.04
+FROM nvidia/cuda:9.2-base-ubuntu16.04
 
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
@@ -44,7 +44,7 @@ RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
 RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
 RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision-nightly
 RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
-
+RUN /opt/conda/bin/conda install --name fastai -c fastai fastprogress
 RUN /opt/conda/bin/conda clean -ya
 
 RUN chmod -R a+w /notebooks
@@ -52,6 +52,11 @@ RUN chmod -R a+w /notebooks
 ENV PATH /opt/conda/bin:$PATH
 WORKDIR /notebooks
 
+# Clone course-v3 repo
+RUN git clone https://github.com/fastai/course-v3.git
+# Link 
+RUN ln -s /storage /notebooks/course-v3/nbs/dl1/data 
+
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
