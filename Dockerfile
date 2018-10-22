@@ -59,4 +59,6 @@ RUN ln -s /storage /notebooks/course-v3/nbs/dl1/data
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
+COPY config.yml /root/.fastai/config.yml
+
 CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
