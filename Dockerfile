@@ -18,14 +18,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
 
-
 ENV PYTHON_VERSION=3.6
 RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
     /opt/conda/bin/conda install conda-build
-
 
 WORKDIR /notebooks
 
@@ -55,10 +53,10 @@ WORKDIR /notebooks
 # Clone course-v3 repo
 RUN git clone https://github.com/fastai/course-v3.git
 # Link 
-RUN ln -s /storage /notebooks/course-v3/nbs/dl1/data 
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
 COPY config.yml /root/.fastai/config.yml
+COPY run.sh /run.sh
 
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
+CMD ["/run.sh"]
