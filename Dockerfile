@@ -39,10 +39,7 @@ CMD source ~/.bashrc
 
 # PyTorch 1.0 and FastAI 1.0
 RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
-RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
-RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision-nightly
-RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
-RUN /opt/conda/bin/conda install --name fastai -c fastai fastprogress
+RUN /opt/conda/bin/conda install --name fastai -c pytorch -c fastai fastai
 RUN /opt/conda/bin/conda clean -ya
 
 RUN chmod -R a+w /notebooks
