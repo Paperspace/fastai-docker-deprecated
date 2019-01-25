@@ -24,4 +24,4 @@ Nvidia Drivers
 
 You can also just run the following without having to build the entire container yourself. This will pull the container from Docker Hub.
 
-`sudo docker run --runtime=nvidia -d -p 8888:8888 paperspace/fastai:cuda9_pytorch0.3.0`
+`sudo docker run --runtime=nvidia -d -p 8888:8888 paperspace/fastai:0.7-CUDA9-base-2.0`
