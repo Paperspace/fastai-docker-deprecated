@@ -5,8 +5,12 @@ channels:
   - fastai
 dependencies:
   - pytorch
+  - torchvision
+  - cuda92
+  - fastprogress
   - fastai
   - jupyter
+  - jupyterlab
   - pip:
       - nvidia-ml-py3
       - dataclasses
