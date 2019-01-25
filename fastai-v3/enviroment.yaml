@@ -7,3 +7,6 @@ dependencies:
   - pytorch
   - fastai
   - jupyter
+  - pip:
+      - nvidia-ml-py3
+      - dataclasses
