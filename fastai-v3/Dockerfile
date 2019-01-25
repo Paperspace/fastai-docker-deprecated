@@ -41,7 +41,7 @@ CMD source ~/.bashrc
 # PyTorch 1.0 and FastAI 1.0
 RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
 RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
-RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision-nightly
+RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision
 RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
 RUN /opt/conda/bin/conda install --name fastai -c fastai fastprogress
 RUN /opt/conda/bin/conda clean -ya
@@ -51,11 +51,9 @@ RUN chmod -R a+w /notebooks
 ENV PATH /opt/conda/bin:$PATH
 WORKDIR /notebooks
 
-# Clone course-v3 repo
-RUN git clone https://github.com/fastai/course-v3.git
-# Checkout v3 master as of 1/24/2019
-RUN git checkout 2d532e82517a8b528b351fa6b2da985da0affe8b
-RUN git checkout 
+# Clone course-v3 repo and checkout v3 master commit hash as of 1/24/2019
+RUN git clone https://github.com/fastai/course-v3.git && cd course-v3 && git checkout 2d532e82517a8b528b351fa6b2da985da0affe8b & cd ..
+RUN git checkout
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
