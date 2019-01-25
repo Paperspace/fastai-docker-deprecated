@@ -1,4 +1,8 @@
 name: fastai
+channels:
+  - conda-forge
+  - pytorch
+  - fastai
 dependencies:
   - pytorch
   - fastai
