@@ -28,7 +28,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
 WORKDIR /notebooks
 
 # clone fastai v1.0.42
-RUN git clone --single-branch --branch 1.0.42 https://github.com/fastai/fastai.git .
+RUN git clone --single-branch --branch master https://github.com/fastai/fastai.git .
 RUN ls && /opt/conda/bin/conda env create
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
@@ -42,7 +42,7 @@ CMD source ~/.bashrc
 RUN /opt/conda/bin/conda install --name fastai -c conda-forge jupyterlab
 RUN /opt/conda/bin/conda install --name fastai -c pytorch pytorch-nightly cuda92
 RUN /opt/conda/bin/conda install --name fastai -c fastai torchvision
-RUN /opt/conda/bin/conda install --name fastai -c fastai fastai
+RUN /opt/conda/bin/conda install --name fastai -c pytorch -c fastai fastai=1.0.42
 RUN /opt/conda/bin/conda install --name fastai -c fastai fastprogress
 RUN /opt/conda/bin/conda clean -ya
 
