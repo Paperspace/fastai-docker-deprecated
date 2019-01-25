@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          ca-certificates \
          python-qt4 \
          libjpeg-dev \
-	 zip \
-	 unzip \
+         zip \
+         unzip \
          libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
 
@@ -27,7 +27,8 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
 
 WORKDIR /notebooks
 
-RUN git clone https://github.com/fastai/fastai.git .
+# clone fastai v1.0.42
+RUN git clone --single-branch --branch 1.0.42 https://github.com/fastai/fastai.git .
 RUN ls && /opt/conda/bin/conda env create
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
@@ -52,7 +53,9 @@ WORKDIR /notebooks
 
 # Clone course-v3 repo
 RUN git clone https://github.com/fastai/course-v3.git
-# Link 
+# Checkout v3 master as of 1/24/2019
+RUN git checkout 2d532e82517a8b528b351fa6b2da985da0affe8b
+RUN git checkout 
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
