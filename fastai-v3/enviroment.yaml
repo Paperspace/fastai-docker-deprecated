@@ -10,7 +10,6 @@ dependencies:
   - fastprogress
   - fastai
   - jupyter
-  - jupyterlab
   - pip:
       - nvidia-ml-py3
       - dataclasses
