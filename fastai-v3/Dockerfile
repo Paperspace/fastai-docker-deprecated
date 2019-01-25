@@ -51,9 +51,8 @@ RUN chmod -R a+w /notebooks
 ENV PATH /opt/conda/bin:$PATH
 WORKDIR /notebooks
 
-# Clone course-v3 repo and checkout v3 master commit hash as of 1/24/2019
-RUN git clone https://github.com/fastai/course-v3.git && cd course-v3 && git checkout 2d532e82517a8b528b351fa6b2da985da0affe8b & cd ..
-RUN git checkout
+# Clone course-v3
+RUN git clone https://github.com/fastai/course-v3.git
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
 
